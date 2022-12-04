@@ -31,9 +31,9 @@ const authorization = async (req, res, next) => {
             let decodedToken = jwt.verify(token, "secret")
     
             let bookId = req.params.bookId
-            if (!valid.isValidObjectId(bookId)) {
-                return res.status(400).send({ status: false, msg: "invalid bookId" })
-            }
+            // if (!valid.isValidObjectId(bookId)) {
+            //     return res.status(400).send({ status: false, msg: "Invalid bookId" })
+            // }
             if (bookId) {
     
              let userId =    await bookModel.find({ _id: bookId }).select({ userId: 1, _id: 0 })
@@ -46,7 +46,7 @@ const authorization = async (req, res, next) => {
             else {
                 let userID = req.body.userId
                 if (!valid.isValidObjectId(userID)) {
-                    return res.status(400).send({ status: false, msg: "invalid bookId" })
+                    return res.status(400).send({ status: false, msg: "invalid userId" })
                 }
                 let ID = decodedToken.userId
                 
